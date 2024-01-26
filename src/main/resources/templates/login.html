@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div class="flex flex-col items-center">
+<h1 class="font-bold text-6xl py-4">Login</h1>
+
+
+    <form th:action="@{/login}" method="post">
+
+        <div class="flex flex-col bg-slate-200 px-4 py-10 rounded-md border-2 border-black mt-6 mb-4">
+
+
+
+    <label for="username">Username</label>
+    <input class="border rounded-md px-1 my-2" type="text" id="username" placeholder="username..." name="username" required>
+
+    <label for="password">Password</label>
+    <input class="border-2 rounded-md px-1 my-2" name="password" type="password" id="password" placeholder="password..." required>
+
+            <div class="flex">
+    <label for="remember-me" class="mr-1">Remember me</label>
+    <input type="checkbox" id="remember-me" name="remember-me">
+            </div>
+
+        </div>
+
+        <div class="flex justify-center">
+        <button type="submit" class="bg-sky-500 rounded-md px-8 py-1">LOGIN</button>
+        </div>
+
+</form>
+
+    <div class="flex py-2">
+    <p class="px-1">Don't have an account?</p>
+    <a th:href="@{/register}" class="text-sky-500">Register!</a>
+    </div>
+
+</div>
+
+<div th:if="${param.error}">
+    <p class="text-red-500">
+        [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+</div>
+
+</body>
+</html>

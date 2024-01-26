@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="flex flex-col items-center">
+ <h1 class="font-bold text-6xl py-4">Register</h1>
+
+ <form method="post" th:action="@{/register}" th:object="${userEntity}">
+
+     <div class="flex flex-col bg-slate-200 px-4 py-10 rounded-md border-2 border-black mt-6 mb-4">
+
+     <label for="username">Username</label>
+         <input type="text" th:field="*{username}" id="username" placeholder="username...">
+
+     <br>
+     <br>
+     <input type="password" th:field="*{password}" placeholder="password..." id="password">
+
+     <label for="roles">Select Role:</label>
+     <select id="roles" name="roles" th:field="*{role}">
+         <option th:each="role : ${roles}" th:value="${role.name()}" th:text="${role.name()}"></option>
+     </select>
+
+     <button type="submit">Register</button>
+
+     <p 	th:if="${#fields.hasErrors('username')}"
+           th:errorclass="error"
+           th:errors="*{username}">
+     </p>
+
+     <!-- Show MULTIPLE errors at once -->
+     <ul>
+         <li th:each="error : ${#fields.errors('password')}" th:text="${error}" class="error">
+     </ul>
+
+     <!-- Show ANY error in the form -->
+     <div th:if="${#fields.hasAnyErrors()}">
+         <ul>
+             <li th:each="error : ${#fields.allErrors()}" th:text="${error}">
+
+             </li>
+         </ul>
+     </div>
+     </div>
+
+ </form>
+     </div>
+
+</body>
+</html>
