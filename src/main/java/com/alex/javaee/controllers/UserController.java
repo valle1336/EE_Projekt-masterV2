@@ -4,6 +4,8 @@ import com.alex.javaee.config.PasswordConfig;
 import com.alex.javaee.models.user.Roles;
 import com.alex.javaee.models.user.UserEntity;
 import com.alex.javaee.models.user.UserRepository;
+import com.alex.javaee.models.user.ads.AdEntity;
+import com.alex.javaee.models.user.ads.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,26 @@ public class UserController {
         model.addAttribute("roles", Roles.values());
 
         return "register";
+    }
+
+    @GetMapping("/createAd")
+    public String createAdPage(AdEntity adEntity, Model model) {
+        model.addAttribute("categories", Categories.values());
+
+        return "createAd";
+    }
+
+    @PostMapping("/createAd")
+    public String createAnAd(
+            @Valid AdEntity adEntity,
+            BindingResult result,
+            Categories categories
+    ) {
+        if (result.hasErrors()) {
+            return "createAd";
+        }
+
+        // Fixa postmapping så att vi kan spara våra annonser i databasen!
     }
 
     @PostMapping("/register")

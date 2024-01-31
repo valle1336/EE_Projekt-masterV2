@@ -1,5 +1,7 @@
 package com.alex.javaee;
 
+import com.alex.javaee.dto.UserEntityDTORecord;
+import com.alex.javaee.models.user.Roles;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +19,15 @@ public class Lektion5Application {
 		System.out.println("Encoded password = " + encodedPassword );
 		System.out.println("Does the password match: " + passwordEncoder .matches(password, encodedPassword)
 		);
+
+
+
+
+
+
+
+
+
 
 	}
 

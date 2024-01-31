@@ -1,9 +1,11 @@
 package com.alex.javaee.dao;
 
 import com.alex.javaee.models.user.UserEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
+@Component
 public class UserEntityDAO implements IUserEntityDAO {
 
 
