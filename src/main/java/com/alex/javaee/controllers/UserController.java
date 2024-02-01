@@ -41,6 +41,7 @@ public class UserController {
         return "createAd";
     }
 
+    /*
     @PostMapping("/createAd")
     public String createAnAd(
             @Valid AdEntity adEntity,
@@ -53,7 +54,7 @@ public class UserController {
 
         // Fixa postmapping så att vi kan spara våra annonser i databasen!
     }
-
+     */
     @PostMapping("/register")
     public String registerUser(
             @Valid UserEntity userEntity,   // Enables Error Messages

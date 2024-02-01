@@ -1,9 +1,10 @@
 package com.alex.javaee.models.user.ads;
 
 public enum Categories {
-    Protein(),
+    Clothes(),
     Equipment(),
-    Drinks();
+    Weights(),
+    Machines();
 
 
 
