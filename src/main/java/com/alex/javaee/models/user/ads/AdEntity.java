@@ -12,16 +12,16 @@ public class AdEntity {
     private long id;
 
     @Size(min = 1, max = 20, message = "Title cannot be empty or more than 20 characters!")
-    private String Title;
+    private String title;
     @Size(min = 1, max = 250, message = "Description cannot be empty or more than 250 characters!")
-    private String Description;
+    private String description;
     @Enumerated(EnumType.STRING)
     private Categories categories;
 
     public AdEntity(long id, String title, String description, Categories categories) {
         this.id = id;
-        Title = title;
-        Description = description;
+        this.title = title;
+        this.description = description;
         this.categories = categories;
     }
 
@@ -37,19 +37,19 @@ public class AdEntity {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public Categories getCategories() {
