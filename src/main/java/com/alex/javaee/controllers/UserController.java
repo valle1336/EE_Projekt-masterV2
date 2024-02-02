@@ -1,12 +1,14 @@
 package com.alex.javaee.controllers;
 
 import com.alex.javaee.config.PasswordConfig;
+import com.alex.javaee.dao.UserEntityDAO;
 import com.alex.javaee.models.user.Roles;
 import com.alex.javaee.models.user.UserEntity;
 import com.alex.javaee.models.user.UserRepository;
 import com.alex.javaee.models.user.ads.AdEntity;
 import com.alex.javaee.models.user.ads.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,14 +18,15 @@ import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
-
     private final UserRepository userRepository;
     private final PasswordConfig appPasswordConfig; // Bcrypt
+    private final UserEntityDAO userEntityDAO;
 
     @Autowired
-    public UserController(UserRepository userRepository, PasswordConfig appPasswordConfig) {
+    public UserController(UserRepository userRepository, PasswordConfig appPasswordConfig, UserEntityDAO userEntityDAO) {
         this.userRepository = userRepository;
         this.appPasswordConfig = appPasswordConfig;
+        this.userEntityDAO = userEntityDAO;
     }
 
     @GetMapping("/register")
@@ -34,27 +37,6 @@ public class UserController {
         return "register";
     }
 
-    @GetMapping("/createAd")
-    public String createAdPage(AdEntity adEntity, Model model) {
-        model.addAttribute("categories", Categories.values());
-
-        return "createAd";
-    }
-
-    /*
-    @PostMapping("/createAd")
-    public String createAnAd(
-            @Valid AdEntity adEntity,
-            BindingResult result,
-            Categories categories
-    ) {
-        if (result.hasErrors()) {
-            return "createAd";
-        }
-
-        // Fixa postmapping så att vi kan spara våra annonser i databasen!
-    }
-     */
     @PostMapping("/register")
     public String registerUser(
             @Valid UserEntity userEntity,   // Enables Error Messages
@@ -81,5 +63,4 @@ public class UserController {
 
         return "redirect:/login";
     }
-
 }

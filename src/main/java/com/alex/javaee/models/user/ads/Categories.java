@@ -6,6 +6,4 @@ public enum Categories {
     Weights(),
     Machines();
 
-
-
 }
