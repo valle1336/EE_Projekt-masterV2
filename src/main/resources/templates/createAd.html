@@ -22,7 +22,29 @@
         <option th:each="categories : ${categories}" th:value="${categories.name()}" th:text="${categories.name()}"></option>
     </select>
 
+    <p 	th:if="${#fields.hasErrors('Title')}"
+          th:errorclass="error"
+          th:errors="*{Title}">
+    </p>
 
+    <p 	th:if="${#fields.hasErrors('categories')}"
+          th:errorclass="error"
+          th:errors="*{categories}">
+    </p>
+
+    <!-- Show MULTIPLE errors at once -->
+    <ul>
+        <li th:each="error : ${#fields.errors('Description')}" th:text="${error}" class="error">
+    </ul>
+
+    <!-- Show ANY error in the form -->
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li th:each="error : ${#fields.allErrors()}" th:text="${error}">
+
+            </li>
+        </ul>
+    </div>
 
     <button type="submit">Post Ad!</button>
 

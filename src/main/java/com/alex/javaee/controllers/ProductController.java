@@ -1,5 +1,7 @@
 package com.alex.javaee.controllers;
 
+import com.alex.javaee.dao.AdEntityDAO;
+import com.alex.javaee.dao.IAdEntityDAO;
 import com.alex.javaee.models.user.ads.AdEntity;
 import com.alex.javaee.models.user.ads.Categories;
 import com.alex.javaee.models.user.ads.ProductRepository;
@@ -10,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -26,6 +30,14 @@ public class ProductController {
         model.addAttribute("categories", Categories.values());
 
         return "createAd";
+    }
+
+    @GetMapping("/")
+    public String showProducts(AdEntity adEntity, Model model)  {
+        List<AdEntity> products = productRepository.findAll();
+        model.addAttribute("products", products);
+
+        return "home";
     }
 
 

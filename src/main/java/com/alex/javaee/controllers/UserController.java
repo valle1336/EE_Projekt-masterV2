@@ -61,6 +61,6 @@ public class UserController {
 
         userRepository.save(userEntity);
 
-        return "redirect:/login";
+        return "redirect:/createAd";
     }
 }
