@@ -39,7 +39,7 @@ public class AdEntityDAO implements IAdEntityDAO{
     }
 
     @Override
-    public void delete() {
+        public void delete() {
 
     }
 }

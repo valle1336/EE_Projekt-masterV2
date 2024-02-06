@@ -1,10 +1,17 @@
 package com.alex.javaee.config;
 
+import com.alex.javaee.models.user.ads.Image;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.io.IOException;
 
 @Configuration  // Allows Spring to find this config
 @EnableWebMvc
@@ -26,5 +33,26 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**", "/static/**").
                 addResourceLocations("/resources/", "classpath:/static/");
+    }
+    @Bean
+    public Converter<MultipartFile, Image> multipartFileToImageConverter() {
+        return new Converter<MultipartFile, Image>() {
+            @Override
+            public Image convert(MultipartFile multipartFile) {
+                try {
+                    Image image = new Image();
+                    image.setImageName(multipartFile.getOriginalFilename());
+                    image.setImageData(multipartFile.getBytes());
+                    return image;
+                } catch (IOException e) {
+                    throw new RuntimeException("Error converting MultipartFile to Image", e);
+                }
+            }
+        };
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(multipartFileToImageConverter());
     }
 }

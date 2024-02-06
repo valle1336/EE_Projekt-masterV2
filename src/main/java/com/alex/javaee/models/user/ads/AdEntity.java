@@ -11,6 +11,10 @@ public class AdEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
+
     @Size(min = 1, max = 20, message = "Title cannot be empty or more than 20 characters!")
     private String title;
     @Size(min = 1, max = 250, message = "Description cannot be empty or more than 250 characters!")
@@ -18,15 +22,26 @@ public class AdEntity {
     @Enumerated(EnumType.STRING)
     private Categories categories;
 
-    public AdEntity(long id, String title, String description, Categories categories) {
+    public AdEntity(long id, String title, String description, Categories categories, Image image) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.categories = categories;
+        this.image = image;
     }
 
     public AdEntity() {
     }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+
 
     public long getId() {
         return id;
