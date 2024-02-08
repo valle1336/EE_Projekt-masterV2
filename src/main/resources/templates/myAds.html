@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Ads Page</title>
+</head>
+<body>
+
+<h1>This is my ads page!</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Category</th>
+  </tr>
+  </thead>
+  <tbody>
+  <div>
+    <tr th:each="products : ${products}">
+      <td th:text="*{products.title}"></td>
+      <td th:text="*{products.description}"></td>
+      <td th:text="*{products.categories}"></td>
+    </tr>
+  </div>
+  </tbody>
+</table>
+
+</body>
+</html>

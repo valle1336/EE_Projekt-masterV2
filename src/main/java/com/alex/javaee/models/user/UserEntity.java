@@ -1,6 +1,7 @@
 package com.alex.javaee.models.user;
 
 
+import com.alex.javaee.models.user.ads.AdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -17,6 +18,9 @@ public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<AdEntity> ads;
 
     @Size(min = 1, max = 64, message = "Username cannot be empty or more than 64 characters!")
     private String username;
@@ -113,5 +117,13 @@ public class UserEntity implements UserDetails {
 
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public List<AdEntity> getAds() {
+        return ads;
+    }
+
+    public void setAds(List<AdEntity> ads) {
+        this.ads = ads;
     }
 }

@@ -1,5 +1,6 @@
 package com.alex.javaee.models.user.ads;
 
+import com.alex.javaee.models.user.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -22,12 +23,18 @@ public class AdEntity {
     @Enumerated(EnumType.STRING)
     private Categories categories;
 
-    public AdEntity(long id, String title, String description, Categories categories, Image image) {
+    @ManyToOne()
+    @JoinColumn(name = "users_id")
+    private UserEntity user;
+
+
+    public AdEntity(long id, String title, String description, Categories categories, Image image, UserEntity user) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.categories = categories;
         this.image = image;
+        this.user = user;
     }
 
     public AdEntity() {
@@ -42,6 +49,13 @@ public class AdEntity {
     }
 
 
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 
     public long getId() {
         return id;

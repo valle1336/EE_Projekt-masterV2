@@ -26,6 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/register").setViewName("register");
         registry.addViewController("/admin-page").setViewName("admin-page");
         registry.addViewController("/createAd").setViewName("createAd");
+        registry.addViewController("/myAds").setViewName("myAds");
 
     }
     //Unblocks CSS, JS, Images etc...
