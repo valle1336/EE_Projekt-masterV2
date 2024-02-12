@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Delete Ad Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
+<a th:href="@{/}" class="flex justify-center mt-2 text-6xl font-bold"> Gym Bro
+    <img width="72px" height="100px" src="../static/images/dumb.png" alt="This Image could not be loaded" class="ml-2">
+</a>
+
+
 <h1>Are you sure?</h1>
 
 <form th:action="@{/delete-Ad(adId=${adId})}" th:method="post">

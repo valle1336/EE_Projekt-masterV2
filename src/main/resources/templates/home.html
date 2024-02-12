@@ -7,41 +7,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="flex-col min-w-screen min-h-screen">
-    <h1 class="flex justify-center mt-2 text-6xl font-bold"> Gym Bro </h1>
-        <img width="100px" height="100px" src="../static/images/hammer.png" alt="This Image could not be loaded">
-        <table>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Email</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <div class="flex items-center">
-            <tr th:each="adEntity : ${products}">
-                <td>
-                    <a th:href="@{/viewAd/{id}(id=${adEntity.id})}" th:text="${adEntity.title}" class="text-4xl"></a>
-                </td>
-                <td th:text="*{adEntity.description}"></td>
-                <td th:text="*{adEntity.categories}"></td>
-                <td th:text="*{adEntity.email}"></td>
-                <td th:text="*{adEntity.price}">kr</td>
-                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                        <a th:href="@{/editAd(adId=${adEntity.id})}">Edit</a>
-                        <a th:href="@{/deleteAd(adId=${adEntity.id})}">Delete</a>
-                </td>
+    <h1 class="flex justify-center mt-2 text-6xl font-bold"> Gym Bro
+        <img width="72px" height="100px" src="../static/images/dumb.png" alt="This Image could not be loaded" class="ml-2">
+    </h1>
+
+
+        <div class="flex flex-wrap justify-center mt-10 max-w-screen-lg mx-auto">
+            <div th:each="adEntity : ${products}" class="flex flex-grow items-center flex-col bg-slate-200 rounded-md border-2 border-black py-10 px-28 mx-4 my-4">
+                <a th:href="@{/viewAd/{id}(id=${adEntity.id})}" th:text="${adEntity.title}" class="text-4xl"></a>
+                <p th:text="*{adEntity.description}"></p>
+                <p th:text="*{adEntity.categories}"></p>
+                <p th:text="*{adEntity.email}"></p>
+                <p th:text="*{adEntity.price}">kr</p>
+                <p th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a th:href="@{/editAd(adId=${adEntity.id})}">Edit</a>
+                    <a th:href="@{/deleteAd(adId=${adEntity.id})}">Delete</a>
+                </p>
             </div>
-            </tbody>
-        </table>
-        <div class="flex flex-col items-center mt-8">
-    <a th:href="@{/login}" class="mt-2 bg-sky-400 rounded-md p-2 px-12"> Login!</a>
-    <a th:href="@{/register}" class="bg-red-400 rounded-md mt-2 flex justify-center mt-2 p-2">Register Account!</a>
         </div>
-    </div>
+
+        <div class="flex flex-row justify-center mt-8 ">
+             <a th:href="@{/createAd}" class="bg-sky-400 font-bold text-4xl px-4 pb-2 rounded-full mb-10">+</a>
+             <a th:href="@{/myAds}" class="bg-purple-400 text-xl px-4 pb-2 mx-2 rounded-full mb-10 flex items-center">My Ads</a>
+             <p th:if="${#authentication.principal == null}" >
+                 <a th:href="@{/logout}" class="bg-red-400 text-4xl px-4 pb-2 mx-2 rounded-full mb-10">Logout</a>
+             </p>
+            <p th:if="${#authentication.principal != null}">
+                <a th:href="@{/logout}" class="bg-green-400 text-4xl px-4 pb-2 mx-2 rounded-full mb-10">Login</a>
+            </p>
+
+        </div>
+
 
 </body>
 </html>

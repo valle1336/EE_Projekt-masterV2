@@ -7,6 +7,11 @@
 </head>
 <body>
 <div>
+
+    <a th:href="@{/}" class="flex justify-center mt-2 text-6xl font-bold"> Gym Bro
+        <img width="72px" height="100px" src="../static/images/dumb.png" alt="This Image could not be loaded" class="ml-2">
+    </a>
+
 <h1>Create an ad!</h1>
 
 <form method="post" th:action="@{/createAd}" th:object="${adEntity}" enctype="multipart/form-data">

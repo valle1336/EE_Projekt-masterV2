@@ -3,35 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>My Ads Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
-<h1>This is my ads page!</h1>
+<a th:href="@{/}" class="flex justify-center mt-2 text-6xl font-bold"> Gym Bro
+  <img width="72px" height="100px" src="../static/images/dumb.png" alt="This Image could not be loaded" class="ml-2">
+</a>
 
-<table>
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Category</th>
-  </tr>
-  </thead>
-  <tbody>
-  <div>
-    <tr th:each="products : ${userAds}">
-      <td th:text="*{products.title}"></td>
-      <td th:text="*{products.description}"></td>
-      <td th:text="*{products.categories}"></td>
-      <td>
-        <a th:href="@{/editAd(adId=${products.id})}">Edit Info</a>
-      </td>
-      <td>
-        <a th:href="@{/deleteAd(adId=${products.id})}">Delete</a>
-      </td>
-    </tr>
+<div class="flex flex-wrap justify-center mt-10 max-w-screen-lg mx-auto">
+  <div th:each="adEntity : ${userAds}" class="flex flex-grow items-center flex-col bg-slate-200 rounded-md border-2 border-black py-10 px-28 mx-4 my-4">
+    <h1 th:text="${adEntity.title}" class="text-4xl"></h1>
+    <p th:text="*{adEntity.description}"></p>
+    <p th:text="*{adEntity.categories}"></p>
+    <p th:text="*{adEntity.email}"></p>
+    <p th:text="*{adEntity.price}">kr</p>
+      <a th:href="@{/editAd(adId=${adEntity.id})}">Edit</a>
+      <a th:href="@{/deleteAd(adId=${adEntity.id})}">Delete</a>
   </div>
-  </tbody>
-</table>
+</div>
+
 
 </body>
 </html>

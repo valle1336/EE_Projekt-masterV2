@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>View Ad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
-<h1 th:text="${adEntity.title}"></h1>
-<p th:text="${adEntity.description}"></p>
-<p th:text="${adEntity.categories}"></p>
-<p th:text="${adEntity.email}"></p>
-<p th:text="${adEntity.price}"></p>
+<a th:href="@{/}" class="flex justify-center mt-2 text-6xl font-bold"> Gym Bro
+    <img width="72px" height="100px" src="../static/images/dumb.png" alt="This Image could not be loaded" class="ml-2">
+</a>
 
+<div class="flex justify-center mt-10">
+<div class="flex items-center flex-col bg-slate-200 rounded-md border-2 border-black py-10 px-28">
+<h1 th:text="${adEntity.title}" class="text-3xl font-bold"></h1>
+<p th:text="${adEntity.description}" class="mt-2"></p>
+<p th:text="${adEntity.categories}" class="mt-2"></p>
+<p th:text="${adEntity.email}" class="mt-2"></p>
+<p th:text="${adEntity.price}" class="mt-2"></p>
+<div class="bg-sky-500 rounded-md border-2 border-black mt-16 py-2 px-6">
 <a th:href="'mailto:' + ${adEntity.email}">Contact seller!</a>
+</div>
+</div>
+</div>
 
 </body>
 </html>
