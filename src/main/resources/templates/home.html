@@ -16,7 +16,8 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Category</th>
-                <th>Image</th>
+                <th>Email</th>
+                <th>Price</th>
             </tr>
             </thead>
             <tbody>
@@ -27,7 +28,12 @@
                 </td>
                 <td th:text="*{adEntity.description}"></td>
                 <td th:text="*{adEntity.categories}"></td>
-            </tr>
+                <td th:text="*{adEntity.email}"></td>
+                <td th:text="*{adEntity.price}">kr</td>
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                        <a th:href="@{/editAd(adId=${adEntity.id})}">Edit</a>
+                        <a th:href="@{/deleteAd(adId=${adEntity.id})}">Delete</a>
+                </td>
             </div>
             </tbody>
         </table>

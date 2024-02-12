@@ -19,22 +19,44 @@ public class AdEntity {
     @Enumerated(EnumType.STRING)
     private Categories categories;
 
+    private String email;
+
+    private int price;
+
     @ManyToOne
     @JoinColumn(name = "users_id")
     private UserEntity user;
 
 
-    public AdEntity(long id, String title, String description, Categories categories, Image image, UserEntity user) {
+    public AdEntity(long id, String title, String description, Categories categories, UserEntity user, String email, int price) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.categories = categories;
         this.user = user;
+        this.email = email;
+        this.price = price;
     }
 
     public AdEntity() {
     }
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public UserEntity getUser() {
         return user;

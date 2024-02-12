@@ -9,6 +9,10 @@
 <h1 th:text="${adEntity.title}"></h1>
 <p th:text="${adEntity.description}"></p>
 <p th:text="${adEntity.categories}"></p>
+<p th:text="${adEntity.email}"></p>
+<p th:text="${adEntity.price}"></p>
+
+<a th:href="'mailto:' + ${adEntity.email}">Contact seller!</a>
 
 </body>
 </html>
