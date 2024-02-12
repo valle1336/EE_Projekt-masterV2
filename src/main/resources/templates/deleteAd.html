@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Ad Page</title>
+</head>
+<body>
+<h1>Are you sure?</h1>
+
+<form th:action="@{/delete-Ad(adId=${adId})}" th:method="post">
+    <input type="text" th:name="adId" th:value="${adId}">
+
+    <label for="title">Title</label>
+    <p type="text" id="title" th:name="title" th:value="${adTitle}"></p>
+    <br>
+
+    <label for="desc">Description</label>
+    <p th:name="description" id="desc" cols="50" rows="4" th:text="${adDescription}"></p>
+    <br>
+
+    <button type="submit">Delete</button>
+
+
+</form>
+</body>
+</html>

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Component
 public class UserEntityDAO implements IUserEntityDAO {
@@ -22,6 +23,11 @@ public class UserEntityDAO implements IUserEntityDAO {
     @Override
     public UserEntity findByUsername(String username) {
         return userRepository.findUserByUsername(username);
+    }
+
+    @Override
+    public UserEntity deleteUserById(Long id) {
+        return userRepository.deleteUserById(id);
     }
 
     @Override
@@ -43,5 +49,7 @@ public class UserEntityDAO implements IUserEntityDAO {
     public void delete() {
 
     }
+
+
 
 }

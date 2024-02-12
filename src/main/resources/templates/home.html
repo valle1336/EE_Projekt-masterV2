@@ -22,7 +22,9 @@
             <tbody>
             <div class="flex items-center">
             <tr th:each="adEntity : ${products}">
-                <td th:text="*{adEntity.title}" class="text-4xl"></td>
+                <td>
+                    <a th:href="@{/viewAd/{id}(id=${adEntity.id})}" th:text="${adEntity.title}" class="text-4xl"></a>
+                </td>
                 <td th:text="*{adEntity.description}"></td>
                 <td th:text="*{adEntity.categories}"></td>
             </tr>

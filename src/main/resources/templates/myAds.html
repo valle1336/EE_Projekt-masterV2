@@ -18,10 +18,16 @@
   </thead>
   <tbody>
   <div>
-    <tr th:each="products : ${products}">
+    <tr th:each="products : ${userAds}">
       <td th:text="*{products.title}"></td>
       <td th:text="*{products.description}"></td>
       <td th:text="*{products.categories}"></td>
+      <td>
+        <a th:href="@{/editAd(adId=${products.id})}">Edit Info</a>
+      </td>
+      <td>
+        <a th:href="@{/deleteAd(adId=${products.id})}">Delete</a>
+      </td>
     </tr>
   </div>
   </tbody>

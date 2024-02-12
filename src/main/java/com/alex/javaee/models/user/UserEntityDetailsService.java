@@ -24,5 +24,4 @@ private final UserEntityDAO userEntityDAO;
     }
 
 
-
 }

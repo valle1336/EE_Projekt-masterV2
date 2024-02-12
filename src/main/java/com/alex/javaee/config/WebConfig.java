@@ -35,25 +35,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/**", "/static/**").
                 addResourceLocations("/resources/", "classpath:/static/");
     }
-    @Bean
-    public Converter<MultipartFile, Image> multipartFileToImageConverter() {
-        return new Converter<MultipartFile, Image>() {
-            @Override
-            public Image convert(MultipartFile multipartFile) {
-                try {
-                    Image image = new Image();
-                    image.setImageName(multipartFile.getOriginalFilename());
-                    image.setImageData(multipartFile.getBytes());
-                    return image;
-                } catch (IOException e) {
-                    throw new RuntimeException("Error converting MultipartFile to Image", e);
-                }
-            }
-        };
-    }
 
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(multipartFileToImageConverter());
-    }
-}
+        };
+
+
+

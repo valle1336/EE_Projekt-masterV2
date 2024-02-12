@@ -11,8 +11,6 @@ public class Image {
 
     private String imageName;
 
-    @Lob
-    private byte[] imageData;
 
     // Konstruktorer, getters och setters
 
@@ -22,7 +20,6 @@ public class Image {
 
     public Image(String imageName, byte[] imageData) {
         this.imageName = imageName;
-        this.imageData = imageData;
     }
 
     // getters och setters
@@ -43,11 +40,4 @@ public class Image {
         this.imageName = imageName;
     }
 
-    public byte[] getImageData() {
-        return imageData;
-    }
-
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
-    }
 }

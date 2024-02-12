@@ -3,17 +3,19 @@ package com.alex.javaee.controllers;
 import com.alex.javaee.models.user.UserEntity;
 import com.alex.javaee.models.user.UserRepository;
 import com.alex.javaee.models.user.ads.AdEntity;
+import com.alex.javaee.models.user.ads.AdEntityDetailsService;
 import com.alex.javaee.models.user.ads.Categories;
 import com.alex.javaee.models.user.ads.ProductRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +24,10 @@ public class ProductController {
 
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+
+    @Autowired
+    private AdEntityDetailsService adService;
+
 
     @Autowired
     public ProductController(ProductRepository productRepository, UserRepository userRepository) {
@@ -44,6 +50,54 @@ public class ProductController {
         return "home";
     }
 
+    //Edit Ads with dynamic endpoints
+    @GetMapping("/editAd")
+    public String showEditAdPage(
+            @RequestParam("adId")
+            Long adId,
+            Model model
+    ) {
+        AdEntity ad = productRepository.findById(adId).orElse(null);
+
+        if (ad == null) {
+            return "error.page";
+        }
+        model.addAttribute("adId", adId);
+        model.addAttribute("adTitle", ad.getTitle());
+        model.addAttribute("adDescription", ad.getDescription());
+
+        return "editAd";
+    }
+
+    @GetMapping("/viewAd/{id}")
+    public String getViewAd(@PathVariable("id") Long id, Model model) {
+        AdEntity ad = adService.findById(id);
+
+        if (ad == null) {
+            return "redirect:/error";
+        }
+        model.addAttribute("adEntity", ad);
+        return "viewAd";
+    }
+
+    @GetMapping("/deleteAd")
+    public String showDeleteAd(
+            @RequestParam("adId")
+            Long adId,
+            Model model
+    ) {
+        AdEntity ad = productRepository.findById(adId).orElse(null);
+
+        if (ad == null) {
+            return "error.page";
+        }
+        model.addAttribute("adId", adId);
+        model.addAttribute("adTitle", ad.getTitle());
+        model.addAttribute("adDescription", ad.getDescription());
+
+        return "deleteAd";
+    }
+
     @GetMapping("/myAds")
     public String showMyProducts(AdEntity adEntity, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -55,6 +109,39 @@ public class ProductController {
         model.addAttribute("userAds", userAds);
 
         return "myAds";
+    }
+
+    @PostMapping("/save-edit-ad")
+    public String saveAd(
+            @RequestParam("adId") Long adId,
+            @RequestParam("title") String title,
+            @RequestParam("description") String description)
+    {
+
+        AdEntity ad = productRepository.findById(adId).orElse(null);
+        if (ad == null) {
+            return "error-page";
+        }
+
+        ad.setTitle(title);
+        ad.setDescription(description);
+        productRepository.save(ad);
+
+        return "redirect:/myAds";
+    }
+
+    @DeleteMapping("/delete-Ad/{id}")
+    public String deleteEntity(@PathVariable Long id) {
+        productRepository.deleteById(id);
+        return "redirect:/myAds";
+    }
+
+    @RequestMapping("/viewAd/{id}")
+    public String viewAd(@PathVariable("id") Long id, Model model) {
+        AdEntity ad = adService.findById(id);
+        model.addAttribute("adEntity", ad);
+
+        return "viewAd";
     }
 
 

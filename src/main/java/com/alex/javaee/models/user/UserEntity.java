@@ -38,7 +38,9 @@ public class UserEntity implements UserDetails {
 
     public UserEntity() {}
 
-    public UserEntity(String username, Roles roles, String password, boolean accountNonExpired, boolean accountNonLocked, boolean accountEnabled, boolean credentialsNonExpired) {
+
+
+    public UserEntity(String username, Roles roles, List<AdEntity> ads, String password, boolean accountNonExpired, boolean accountNonLocked, boolean accountEnabled, boolean credentialsNonExpired) {
         this.username = username;
         this.password = password;
         this.role = roles;
@@ -46,6 +48,7 @@ public class UserEntity implements UserDetails {
         this.accountNonLocked = accountNonLocked;
         this.accountEnabled = accountEnabled;
         this.credentialsNonExpired = credentialsNonExpired;
+        this.ads = ads;
     }
 
     @Override
@@ -125,5 +128,9 @@ public class UserEntity implements UserDetails {
 
     public void setAds(List<AdEntity> ads) {
         this.ads = ads;
+    }
+
+    public long getId() {
+        return id;
     }
 }
