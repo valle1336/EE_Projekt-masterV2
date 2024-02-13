@@ -14,7 +14,7 @@
 
 <h1>Are you sure?</h1>
 
-<form th:action="@{/delete-Ad(adId=${adId})}" th:method="post">
+<form th:action="@{/deleteAd(adId=${adId})}" th:method="post">
     <input type="text" th:name="adId" th:value="${adId}">
 
     <label for="title">Title</label>

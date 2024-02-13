@@ -65,6 +65,8 @@ public class ProductController {
         model.addAttribute("adId", adId);
         model.addAttribute("adTitle", ad.getTitle());
         model.addAttribute("adDescription", ad.getDescription());
+        model.addAttribute("adEmail", ad.getEmail());
+        model.addAttribute("adPrice", ad.getPrice());
 
         return "editAd";
     }
@@ -115,7 +117,9 @@ public class ProductController {
     public String saveAd(
             @RequestParam("adId") Long adId,
             @RequestParam("title") String title,
-            @RequestParam("description") String description)
+            @RequestParam("description") String description,
+            @RequestParam("email") String email,
+            @RequestParam("price") int price)
     {
 
         AdEntity ad = productRepository.findById(adId).orElse(null);
@@ -125,12 +129,14 @@ public class ProductController {
 
         ad.setTitle(title);
         ad.setDescription(description);
+        ad.setEmail(email);
+        ad.setPrice(price);
         productRepository.save(ad);
 
         return "redirect:/myAds";
     }
 
-    @DeleteMapping("/delete-Ad/{id}")
+    @DeleteMapping("/deleteAd/{id}")
     public String deleteEntity(@PathVariable Long id) {
         productRepository.deleteById(id);
         return "redirect:/myAds";
